@@ -6,33 +6,51 @@ import { Component } from '@angular/core';
   styleUrls: ['./imc.component.css']
 })
 export class IMCComponent {
-
   altura: number = 0;
-  imc: number | undefined;
+  indice: number | undefined;
   peso: number = 0;
-  result: string | null = null;
+  result: string = '';
+  sexo: string = '';
 
   calculo() {
     if (this.altura !== null || this.peso !== null) {
-      this.imc = this.peso / (this.altura * this.altura);
-      if (this.imc < 18.5){
-       this.result = 'equivalente à abaixo do peso!';
-      } else if (this.imc < 25) {
-        this.result = 'equivalente à peso ideal';
-      } else if (this.imc < 30) {
-        this.result = 'equivalente à sobrepeso';
-      } else if (this.imc < 40) {
-        this.result = 'equivalente à obesidade';
+      this.indice = this.peso / (this.altura * this.altura);
+      if (this.indice < 18.5) {
+        this.result = 'Magreza';
+      } else if (this.indice < 25) {
+        this.result = 'Saudável';
+      } else if (this.indice < 30) {
+        this.result = 'Sobrepeso';
+      } else if (this.indice < 40) {
+        this.result = 'Obesidade';
+      } else {
+        this.result = 'Obesidade grave';
       }
-      else {
-        this.result = 'equivalente à obesidade grave';
+      if (this.sexo === 'Masculino') {
+        this.result = `Homem - ${this.result}`;
       }
-    }
-    else {
-      this.imc = undefined;
+      else if (this.sexo === 'Feminino') {
+        this.result = `Mulher - ${this.result}`;
+      }
+    } else {
+      this.indice = undefined;
       this.result = 'Algo deu errado.';
     }
   }
+
+  Cores() {
+    if (this.result.includes('Magreza')) {
+      return 'danger';
+    } else if (this.result.includes('Saudável')) {
+      return 'success';
+    } else if (this.result.includes('Sobrepeso')) {
+      return 'warning';
+    } else if (this.result.includes('Obesidade')) {
+      return 'danger';
+    } else if (this.result.includes('Obesidade grave')) {
+      return 'danger';
+    } else {
+      return 'sucess';
+    }
+  }
 }
-
-

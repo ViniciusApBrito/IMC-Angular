@@ -1,18 +1,33 @@
-<div class="container">
-  <div class="card col-md-3 position-absolute top-50 start-50 translate-middle text-center text-dark p-3">
+<div class="container ">
+  <div class="card max-w-500 col-md-4 offset-md-4 position-absolute top-50 start-50 translate-middle text-center text-dark p-3">
     <div class="card-body">
       <div class="row">
         <div class="card-title">
-          <h5>Caculadora IMC</h5>
+          <h5>Calculadora IMC</h5>
         </div>
-        <label for="altura" class="mt-1 mb-1">Altura (m):</label>
-        <input [(ngModel)]="altura" type="number" placeholder="Informe sua altura" class="form-control">
-        <label for="peso" class="mt-1 mb-1">Peso (kg):</label>
-        <input [(ngModel)]="peso" type="number" placeholder="Informe seu peso" class="form-control">
-        <button (click)="calculo()" class="btn btn-primary mt-3">Calcular</button>
-
-          <p *ngIf="imc" class="alert alert-success mt-2"> Seu IMC é {{imc.toFixed(2)}} {{result}}</p>
+        <div class="col-12 form-group">
+          <label for="altura">Altura (m):</label>
+          <input [(ngModel)]="altura" type="number" placeholder="Informe sua altura" class="form-control" id="altura">
+        </div>
+        <div class="col-12 form-group">
+          <label for="peso">Peso (kg):</label>
+          <input [(ngModel)]="peso" type="number" placeholder="Informe seu peso" class="form-control" id="peso">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gênero</label>
+          <select class="form-control" id="gender" [(ngModel)]="sexo" name="genero">
+            <option value="homi">Masculino</option>
+            <option value="muie">Feminino</option>
+          </select>
+        </div>
+        <div class="col-12 form-group">
+          <button (click)="calculo()" class="btn btn-primary mt-3">Calcular</button>
+        </div>
+        <div class="col-12 form-group" *ngIf="indice">
+          <h3  class="text-{{ Cores() }}">({{ result }})</h3>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
